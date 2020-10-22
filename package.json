@@ -1,6 +1,6 @@
 {
   "name": "@bimdata/nuxt-auth",
-  "version": "5.0.0-alpha2",
+  "version": "5.0.0-alpha3",
   "description": "Authentication module for Nuxt.js",
   "repository": "nuxt-community/auth-module",
   "license": "MIT",
