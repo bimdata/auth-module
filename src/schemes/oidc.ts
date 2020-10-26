@@ -418,7 +418,15 @@ export default class Oauth2Scheme extends BaseScheme<typeof DEFAULTS> {
       this.$auth.callOnError(error, { method: 'refreshToken' })
       return Promise.reject(error)
     })
-
+    const token = getResponseProp(response, this.options.token.property);
+    try {
+      const tokenPayload = await this.checkJWT(token);
+      this.$auth.$storage.setUniversal(this.name + '.token_payload', JSON.stringify(tokenPayload));
+    }
+    catch (error) {
+      this.$auth.callOnError(error, { method: 'refreshToken' });
+      return Promise.reject(error);
+    }
     this._updateTokens(response)
 
     return response
